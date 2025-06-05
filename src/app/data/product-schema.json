@@ -1,0 +1,65 @@
+{
+  "title": "Product Entry",
+  "fields": [
+    {
+      "label": "Product Name",
+      "name": "productName",
+      "type": "text",
+      "disabled": true
+    },
+    {
+      "label": "Product ID",
+      "name": "productId",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "pattern": "^[A-Z0-9_-]{4,20}$",
+        "message": "SKU must be 4-20 characters, uppercase letters, numbers, - or _"
+      }
+    },
+    {
+      "label": "Price",
+      "name": "price",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "pattern": "^\\d+(\\.\\d{1,2})?$",
+        "message": "Enter a valid price (e.g. 19.99)"
+      }
+    },
+    {
+      "label": "Category",
+      "name": "category",
+      "type": "dropdown",
+      "options": [
+        "Electronics",
+        "Clothing",
+        "Books",
+        "Home",
+        "Other"
+      ],
+      "required": true
+    },
+    {
+      "label": "Tags",
+      "name": "tags",
+      "type": "multiselect",
+      "options": [
+        "New",
+        "Sale",
+        "Popular",
+        "Limited"
+      ]
+    },
+    {
+      "label": "In Stock",
+      "name": "inStock",
+      "type": "checkbox"
+    },
+    {
+      "label": "Description",
+      "name": "description",
+      "type": "textarea"
+    }
+  ]
+}

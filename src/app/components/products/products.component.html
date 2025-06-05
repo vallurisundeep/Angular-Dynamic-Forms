@@ -1,0 +1,12 @@
+<div class="w-4/12 mx-auto mt-10 p-5 bg-white shadow-md rounded-lg">
+  <app-dynamic-form
+    [schema]="productFormSchema"
+    (formSubmitted)="getFormData($event)"
+    [formTitle]="'Product Form'"
+  ></app-dynamic-form>
+  @if(submittedFormValue){
+  <hr class="mt-5 mb-5 border-1 border-gray-200 bg-none" />
+ <app-output [submittedFormValue]="submittedFormValue"></app-output>
+  }
+</div>
+<div class="w-8/12 mx-auto mt-4 mb-4"></div>

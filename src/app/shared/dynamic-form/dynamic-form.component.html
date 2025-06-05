@@ -1,0 +1,126 @@
+  <h1 class="text-2xl font-bold mb-5">{{ formTitle }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+  @for (field of visibleFields; track $index) {
+  <ng-container>
+    @if(field.type !== 'checkbox') {
+    <label class="text-sm align-middle justify-center" [for]="field.name">{{
+      field.label
+    }}</label>
+    } @switch (field.type) { @case ('text') {
+    <div>
+      <input
+        [formControlName]="field.name"
+        [readonly]="field.readonly"
+        [placeholder]="field.name"
+        class="form-control p-3 border-1 rounded w-full border-gray-300 placeholder-gray-300"
+      />
+      @if (getControl(field.name)?.touched && getControl(field.name)?.invalid) {
+      <div class="text-red-500 text-sm mt-1">
+        @for (validation of field.validations ?? []; track $index) { @if
+        (getControl(field.name)?.hasError(validation.name)) {
+        <div>{{ validation.message }}</div>
+        } }
+      </div>
+      }
+    </div>
+    } @case ('textarea') {
+    <div>
+      <textarea
+        [formControlName]="field.name"
+        [readonly]="field.readonly"
+        [placeholder]="field.name"
+        class="form-control p-3 border-1 rounded w-full border-gray-300 placeholder-gray-300"
+      ></textarea>
+      @if (getControl(field.name)?.touched && getControl(field.name)?.invalid) {
+      <div class="text-red-500 text-sm mt-1">
+        @for (validation of field.validations ?? []; track $index) { @if
+        (getControl(field.name)?.hasError(validation.name)) {
+        <div>{{ validation.message }}</div>
+        } }
+      </div>
+      }
+    </div>
+    } @case ('date') {
+    <div>
+      <input
+        type="date"
+        [formControlName]="field.name"
+        class="form-control p-3 border-1 rounded w-full border-gray-300 placeholder-gray-300"
+      />
+      @if (getControl(field.name)?.touched && getControl(field.name)?.invalid) {
+      <div class="text-red-500 text-sm mt-1">
+        @for (validation of field.validations ?? []; track $index) { @if
+        (getControl(field.name)?.hasError(validation.name)) {
+        <div>{{ validation.message }}</div>
+        } }
+      </div>
+      }
+    </div>
+    } @case ('dropdown') {
+    <div>
+      <select
+        [formControlName]="field.name"
+        class="form-control p-3 border-1 rounded w-full border-gray-300 placeholder-gray-300"
+      >
+        @for (opt of field.options; track $index) {
+        <option [value]="opt.key">
+          {{ opt.value }}
+        </option>
+        }
+      </select>
+      @if (getControl(field.name)?.touched && getControl(field.name)?.invalid) {
+      <div class="text-red-500 text-sm mt-1">
+        @for (validation of field.validations ?? []; track $index) { @if
+        (getControl(field.name)?.hasError(validation.name)) {
+        <div>{{ validation.message }}</div>
+        } }
+      </div>
+      }
+    </div>
+    } @case ('multiselect') {
+    <div>
+      <select
+        [formControlName]="field.name"
+        multiple
+        class="form-control p-3 border-1 rounded w-full border-gray-300 placeholder-gray-300"
+      >
+        @for (opt of field.options; track $index) {
+        <option [value]="opt.key">
+          {{ opt.value }}
+        </option>
+        }
+      </select>
+      @if (getControl(field.name)?.touched && getControl(field.name)?.invalid) {
+      <div class="text-red-500 text-sm mt-1">
+        @for (validation of field.validations ?? []; track $index) { @if
+        (getControl(field.name)?.hasError(validation.name)) {
+        <div>{{ validation.message }}</div>
+        } }
+      </div>
+      }
+    </div>
+    } @case ('checkbox') {
+    <div>
+      <input
+        type="checkbox"
+        [formControlName]="field.name"
+        class="justify-center align-middle form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 m-0 mr-2"
+        id="{{ field.name }}"
+      />
+      <label
+        class="text-sm align-middle justify-center"
+        for="{{ field.name }}"
+        >{{ field.label }}</label
+      >
+    </div>
+    } }
+  </ng-container>
+  }
+  <button
+    type="submit"
+    class="btn bg-blue-900 text-white cursor-pointer pl-5 pr-5 pt-2 pb-2 rounded-md text-gray-700 hover:bg-blue-700"
+  >
+    Submit
+  </button>
+</form>
